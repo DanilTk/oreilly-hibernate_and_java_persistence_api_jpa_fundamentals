@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "finances_user")
+@Table(name = "FINANCES_USER")
 @Access(AccessType.FIELD)
 public class User {
     @Id
@@ -26,7 +26,7 @@ public class User {
     @Column(name = "LAST_NAME")
     private String lastName;
 
-    @Column(name = "BIRTH_DATE")
+    @Column(name = "BIRTH_DATE", nullable = false)
     private LocalDate birthDate;
 
     @Column(name = "EMAIL_ADDRESS")
