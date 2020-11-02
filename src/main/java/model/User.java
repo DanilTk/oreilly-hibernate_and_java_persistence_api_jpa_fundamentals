@@ -1,6 +1,7 @@
 package model;
 
 import lombok.*;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "FINANCES_USER")
 @Access(AccessType.FIELD)
@@ -58,4 +60,7 @@ public class User {
 
     @Column(name = "ZIP_CODE")
     private String zipCode;
+
+    @Formula("LOWER(DATEDIFF(CURDATE(), BIRTH_DATE)/365)")
+    int age;
 }
