@@ -46,20 +46,10 @@ public class User {
     @Column(name = "CREATED_DATE")
     private LocalDateTime createdDate;
 
-    @Column(name = "USER_ADDRESS_LINE_1")
-    private String userAddressLine1;
-
-    @Column(name = "USER_ADDRESS_LINE_2")
-    private String userAddressLine2;
-
-    @Column(name = "CITY")
-    private String city;
-
-    @Column(name = "STATE")
-    private String state;
-
-    @Column(name = "ZIP_CODE")
-    private String zipCode;
+    @Embedded
+    @AttributeOverrides({@AttributeOverride(name = "addressLine1", column = @Column(name = "USER_ADDRESS_LINE_1")),
+            @AttributeOverride(name = "addressLine2", column = @Column(name = "USER_ADDRESS_LINE_2"))})
+    Address address;
 
     @Formula("LOWER(DATEDIFF(CURDATE(), BIRTH_DATE)/365)")
     int age;
