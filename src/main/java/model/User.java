@@ -6,6 +6,7 @@ import org.hibernate.annotations.Formula;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -46,11 +47,12 @@ public class User {
     @Column(name = "CREATED_DATE")
     private LocalDateTime createdDate;
 
-    @Embedded
+    @ElementCollection
+    @CollectionTable(name = "user_address", joinColumns = @JoinColumn(name = "USER_ID"))
     @AttributeOverrides({@AttributeOverride(name = "addressLine1", column = @Column(name = "USER_ADDRESS_LINE_1")),
             @AttributeOverride(name = "addressLine2", column = @Column(name = "USER_ADDRESS_LINE_2"))})
-    Address address;
+    private List<Address> addresses;
 
     @Formula("LOWER(DATEDIFF(CURDATE(), BIRTH_DATE)/365)")
-    int age;
+    private int age;
 }
