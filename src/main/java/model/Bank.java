@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -45,6 +45,7 @@ public class Bank {
 
     @ElementCollection
     @CollectionTable(name = "BANK_CONTACT", joinColumns = @JoinColumn(name = "BANK_ID"))
+    @MapKeyColumn(name = "POSITION_TYPE")
     @Column(name = "NAME")
-    private List<String> contacts;
+    private Map<String, String> contacts;
 }
