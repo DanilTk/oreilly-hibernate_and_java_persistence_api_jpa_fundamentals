@@ -17,5 +17,6 @@
         <mapping class="model.TimeTest"/>
         <mapping class="model.Bank"/>
         <mapping class="model.Credential"/>
+        <mapping class="model.Account"/>
     </session-factory>
 </hibernate-configuration>
