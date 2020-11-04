@@ -55,4 +55,7 @@ public class User {
 
     @Formula("LOWER(DATEDIFF(CURDATE(), BIRTH_DATE)/365)")
     private int age;
+
+    @OneToOne(mappedBy = "user")
+    private Credential credential;
 }
