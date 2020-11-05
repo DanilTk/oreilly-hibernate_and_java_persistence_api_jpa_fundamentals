@@ -12,7 +12,7 @@ import java.time.ZoneId;
 
 @Entity
 @ToString
-@Table(name = "time_test")
+@Table(name = "TIME_TEST")
 @NoArgsConstructor
 public class TimeTest {
     @Id
