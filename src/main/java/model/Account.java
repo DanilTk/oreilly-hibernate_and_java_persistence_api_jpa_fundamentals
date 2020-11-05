@@ -1,22 +1,31 @@
 package model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.*;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "ACCOUNT")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Account {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ACCOUNT_ID")
     private Long accountId;
 
-    @Column(name = "BANK_ID")
-    private Bank bankId;
+//    @Column(name = "BANK_ID")
+//    private Bank bank;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
+    private List<Transaction> transactions;
 
     @Column(name = "ACCOUNT_TYPE")
     private String accountType;
