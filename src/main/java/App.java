@@ -10,6 +10,7 @@ import java.util.Set;
 
 public class App {
     public static void main(String[] args) {
+
         Account account1 = createAccount("Investment");
         Account account2 = createAccount("Spending");
 
@@ -21,8 +22,13 @@ public class App {
         user1.setAccounts(Set.of(account1, account2));
         user2.setAccounts(Set.of(account1, account2));
 
-        saveObject(account1);
-        saveObject(account2);
+        try (Session session = HibernateUtil.getSessionFactory().openSession();) {
+
+            session.beginTransaction();
+            session.save(account1);
+            session.save(account2);
+            session.getTransaction().commit();
+        }
     }
 
     private static Budget createBudget() {
