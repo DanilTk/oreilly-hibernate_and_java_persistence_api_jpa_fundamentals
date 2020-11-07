@@ -6,9 +6,23 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public class App {
     public static void main(String[] args) {
+        Account account1 = createAccount("Investment");
+        Account account2 = createAccount("Spending");
+
+        User user1 = createUser("Rob", "Wk");
+        User user2 = createUser("John", "Snow");
+
+        account1.setUsers(Set.of(user1, user2));
+        account2.setUsers(Set.of(user1, user2));
+        user1.setAccounts(Set.of(account1, account2));
+        user2.setAccounts(Set.of(account1, account2));
+
+        saveObject(account1);
+        saveObject(account2);
     }
 
     private static Budget createBudget() {
@@ -44,7 +58,8 @@ public class App {
     }
 
     private static User createUser(String name, String surname) {
-        return User.builder()
+        User user = new User();
+        return user.builder()
                 .firstName(name)
                 .lastName(surname)
                 .birthDate(LocalDate.of(1992, 9, 7))
@@ -54,6 +69,7 @@ public class App {
                 .createdDate(LocalDateTime.now())
                 .lastUpdatedBy("admin")
                 .lastUpdatedDate(LocalDateTime.now())
+                .credential(createCredential(user))
                 .build();
     }
 
@@ -69,7 +85,6 @@ public class App {
 
     private static Account createAccount(String accountName) {
         return Account.builder()
-                .accountType("Saving")
                 .name(accountName)
                 .initialBalance(BigDecimal.ZERO)
                 .currentBalance(BigDecimal.valueOf(10000))

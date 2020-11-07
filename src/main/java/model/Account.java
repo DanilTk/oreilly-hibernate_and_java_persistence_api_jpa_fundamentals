@@ -22,9 +22,6 @@ public class Account {
     @Column(name = "ACCOUNT_ID")
     private Long accountId;
 
-//    @Column(name = "BANK_ID")
-//    private Bank bank;
-
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "USER_ACCOUNT", joinColumns = @JoinColumn(name = "ACCOUNT_ID"),
             inverseJoinColumns = @JoinColumn(name = "USER_ID"))
@@ -57,9 +54,9 @@ public class Account {
     @Column(name = "LAST_UPDATED_DATE")
     private LocalDateTime lastUpdatedDate;
 
-    @Column(name = "CREATED_BY")
+    @Column(name = "CREATED_BY", updatable = false)
     private String createdBy;
 
-    @Column(name = "CREATED_DATE")
+    @Column(name = "CREATED_DATE", updatable = false)
     private LocalDateTime createdDate;
 }

@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -41,10 +42,10 @@ public class User {
     @Column(name = "LAST_UPDATED_DATE")
     private LocalDateTime lastUpdatedDate;
 
-    @Column(name = "CREATED_BY")
+    @Column(name = "CREATED_BY", updatable = false)
     private String createdBy;
 
-    @Column(name = "CREATED_DATE")
+    @Column(name = "CREATED_DATE", updatable = false)
     private LocalDateTime createdDate;
 
     @ElementCollection
@@ -52,6 +53,9 @@ public class User {
     @AttributeOverrides({@AttributeOverride(name = "addressLine1", column = @Column(name = "USER_ADDRESS_LINE_1")),
             @AttributeOverride(name = "addressLine2", column = @Column(name = "USER_ADDRESS_LINE_2"))})
     private List<Address> addresses;
+
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "users")
+    private Set<Account> accounts;
 
     @Formula("LOWER(DATEDIFF(CURDATE(), BIRTH_DATE)/365)")
     private int age;
