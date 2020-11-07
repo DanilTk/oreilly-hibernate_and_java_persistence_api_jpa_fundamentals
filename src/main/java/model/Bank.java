@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 @Getter
@@ -32,7 +33,7 @@ public class Bank {
     private String lastUpdatedBy;
 
     @Column(name = "LAST_UPDATED_DATE")
-    private LocalDate lastUpdatedDate;
+    private LocalDateTime lastUpdatedDate;
 
     @Column(name = "CREATED_BY", updatable = false)
     private String createdBy;

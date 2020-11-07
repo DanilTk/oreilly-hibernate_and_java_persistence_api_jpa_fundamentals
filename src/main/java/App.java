@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class App {
@@ -25,8 +26,7 @@ public class App {
         try (Session session = HibernateUtil.getSessionFactory().openSession();) {
 
             session.beginTransaction();
-            session.save(account1);
-            session.save(account2);
+            session.save(null);
             session.getTransaction().commit();
         }
     }
@@ -108,6 +108,20 @@ public class App {
                 .user(user)
                 .username(user.getEmailAddress())
                 .password("querty")
+                .build();
+    }
+
+    private static Bank createBank(String bankName) {
+        return Bank.builder()
+                .name(bankName)
+                .address(createAddress())
+                .addressType("Headquarter")
+                .isInternational(true)
+                .contacts(Map.of("Dan", "Tk"))
+                .createdBy("admin")
+                .createdDate(LocalDate.now())
+                .lastUpdatedBy("admin")
+                .lastUpdatedDate(LocalDateTime.now())
                 .build();
     }
 }
