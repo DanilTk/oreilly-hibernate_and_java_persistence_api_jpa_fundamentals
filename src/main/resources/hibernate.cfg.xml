@@ -19,5 +19,6 @@
         <mapping class="model.Credential"/>
         <mapping class="model.Account"/>
         <mapping class="model.Transaction"/>
+        <mapping class="model.Budget"/>
     </session-factory>
 </hibernate-configuration>

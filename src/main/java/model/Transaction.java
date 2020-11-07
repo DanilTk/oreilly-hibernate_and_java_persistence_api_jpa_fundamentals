@@ -22,7 +22,7 @@ public class Transaction {
     @Column(name = "TRANSACTION_TYPE")
     private String transactionType;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ACCOUNT_ID")
     private Account account;
 
