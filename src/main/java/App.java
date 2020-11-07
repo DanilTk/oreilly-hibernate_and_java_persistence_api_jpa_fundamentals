@@ -7,24 +7,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class App {
     public static void main(String[] args) {
 
-        Account account1 = createAccount("Investment");
-        Account account2 = createAccount("Spending");
-
-        User user1 = createUser("Rob", "Wk");
-        User user2 = createUser("John", "Snow");
-
-        account1.setUsers(Set.of(user1, user2));
-        account2.setUsers(Set.of(user1, user2));
-        user1.setAccounts(Set.of(account1, account2));
-        user2.setAccounts(Set.of(account1, account2));
-
         try (Session session = HibernateUtil.getSessionFactory().openSession();) {
-
             session.beginTransaction();
             session.save(null);
             session.getTransaction().commit();
@@ -122,6 +109,38 @@ public class App {
                 .createdDate(LocalDate.now())
                 .lastUpdatedBy("admin")
                 .lastUpdatedDate(LocalDateTime.now())
+                .build();
+    }
+
+    private static Transaction createNewBeltPurchase(Account account) {
+        return Transaction.builder()
+                .account(account)
+                .title("Dress Belt")
+                .amount(new BigDecimal("50.00"))
+                .closingBalance(new BigDecimal("0.00"))
+                .createdBy("Kevin Bowersox")
+                .createdDate(LocalDateTime.now())
+                .initialBalance(new BigDecimal("0.00"))
+                .lastUpdatedBy("Kevin Bowersox")
+                .lastUpdatedDate(LocalDateTime.now())
+                .notes("New Dress Belt")
+                .transactionType("Debit")
+                .build();
+    }
+
+    private static Transaction createShoePurchase(Account account) {
+        return Transaction.builder()
+                .account(account)
+                .title("Work Shoes")
+                .amount(new BigDecimal("100.00"))
+                .closingBalance(new BigDecimal("0.00"))
+                .createdBy("Kevin Bowersox")
+                .createdDate(LocalDateTime.now())
+                .initialBalance(new BigDecimal("0.00"))
+                .lastUpdatedBy("Kevin Bowersox")
+                .lastUpdatedDate(LocalDateTime.now())
+                .notes("Nice Pair of Shoes")
+                .transactionType("Debit")
                 .build();
     }
 }
