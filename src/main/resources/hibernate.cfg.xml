@@ -13,6 +13,8 @@
         <mapping class="model.Account"/>
         <mapping class="model.Transaction"/>
         <mapping class="model.Budget"/>
+        <mapping class="model.Currency"/>
+        <mapping class="model.Market"/>
     </session-factory>
 
 </hibernate-configuration>
