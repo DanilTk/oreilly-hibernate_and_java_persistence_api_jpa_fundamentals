@@ -10,12 +10,6 @@ import java.util.Map;
 
 public class App {
     public static void main(String[] args) {
-
-        try (Session session = HibernateUtil.getSessionFactory().openSession();) {
-            session.beginTransaction();
-            session.save(null);
-            session.getTransaction().commit();
-        }
     }
 
     private static Budget createBudget() {
@@ -72,7 +66,7 @@ public class App {
                 .addressLine2("")
                 .city("Warsaw")
                 .state("")
-                .zipCode("00-801")
+                .zipCode("000")
                 .build();
     }
 
