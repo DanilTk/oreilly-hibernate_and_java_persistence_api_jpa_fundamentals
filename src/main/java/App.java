@@ -10,6 +10,23 @@ import java.util.Map;
 
 public class App {
     public static void main(String[] args) {
+
+
+    }
+
+    private static void saveObject(Object obj) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            session.beginTransaction();
+            session.save(obj);
+            session.getTransaction().commit();
+        }
+    }
+
+    private static Market createMarket(Currency currency) {
+        return Market.builder()
+                .marketName("NASDAQ")
+                .currency(currency)
+                .build();
     }
 
     private static Budget createBudget() {
@@ -34,14 +51,6 @@ public class App {
                 .lastUpdatedBy("admin")
                 .lastUpdatedDate(LocalDateTime.now())
                 .build();
-    }
-
-    private static void saveObject(Object obj) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.save(obj);
-        session.getTransaction().commit();
-        session.close();
     }
 
     private static User createUser(String name, String surname) {
