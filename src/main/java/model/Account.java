@@ -30,8 +30,9 @@ public class Account {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
     private List<Transaction> transactions;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "ACCOUNT_TYPE")
-    private String accountType;
+    private AccountType accountType;
 
     @Column(name = "NAME")
     private String name;
