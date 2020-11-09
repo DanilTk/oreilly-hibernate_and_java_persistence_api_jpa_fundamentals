@@ -13,6 +13,8 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "ACCOUNT")
+@NamedQueries({@NamedQuery(name = "Account.largeDeposits", query = "select distinct t.account from Transaction  t where t.amount > 500 " +
+        "and lower(t.transactionType)='deposit'")})
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
